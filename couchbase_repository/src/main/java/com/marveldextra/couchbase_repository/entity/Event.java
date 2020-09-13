@@ -1,5 +1,6 @@
 package com.marveldextra.couchbase_repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
@@ -11,6 +12,7 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 @Document
 @Builder
 @Value
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
 
     @Id

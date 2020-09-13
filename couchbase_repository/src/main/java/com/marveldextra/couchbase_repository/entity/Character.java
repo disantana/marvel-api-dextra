@@ -1,5 +1,6 @@
 package com.marveldextra.couchbase_repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 @Document
 @Builder
 @Value
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Character {
 
     @Id @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
