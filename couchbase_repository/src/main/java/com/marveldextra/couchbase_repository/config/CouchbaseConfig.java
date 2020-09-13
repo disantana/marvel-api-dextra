@@ -1,10 +1,11 @@
 package com.marveldextra.couchbase_repository.config;
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 
 @Configuration
-public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
+public class CouchbaseConfig extends AbstractCouchbaseConfiguration{
 
     @Override
     public String getConnectionString() {
@@ -24,5 +25,7 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     @Override
     public String getBucketName() {
         return "marvel";
-    }
+    } 
+    
+    
 }
