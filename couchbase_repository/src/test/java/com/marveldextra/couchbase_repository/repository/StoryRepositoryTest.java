@@ -18,7 +18,7 @@ public class StoryRepositoryTest extends Assertions {
     @Test
     public void shouldReturnStorySearchedByCharacter(){
         Character character = characterRepository.save(Character.builder()
-                .name("Comic's character Teste")
+                .name("Story character Teste")
                 .description("Character's description")
                 .build());
 
