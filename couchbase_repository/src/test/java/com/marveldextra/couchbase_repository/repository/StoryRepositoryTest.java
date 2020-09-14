@@ -1,7 +1,6 @@
 package com.marveldextra.couchbase_repository.repository;
 
 import com.marveldextra.couchbase_repository.entity.Character;
-import com.marveldextra.couchbase_repository.entity.Event;
 import com.marveldextra.couchbase_repository.entity.Story;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ public class StoryRepositoryTest extends Assertions {
     @Autowired private CharacterRepository characterRepository;
 
     @Test
-    public void shouldReturnEventSearchedByCharacter(){
+    public void shouldReturnStorySearchedByCharacter(){
         Character character = characterRepository.save(Character.builder()
                 .name("Comic's character Teste")
                 .description("Character's description")
