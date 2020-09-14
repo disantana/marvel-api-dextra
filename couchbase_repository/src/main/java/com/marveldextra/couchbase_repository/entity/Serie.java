@@ -23,7 +23,10 @@ public class Serie {
     private String title;
 
     @Field
-    private int pageCount;
+    private int startYear;
+    
+    @Field
+    private int endYear;
 
     @Field
     private String description;
