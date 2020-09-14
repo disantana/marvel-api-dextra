@@ -1,8 +1,11 @@
 package com.marveldextra.couchbase_repository.repository;
 
 import com.marveldextra.couchbase_repository.entity.Character;
-import org.springframework.data.couchbase.repository.CouchbaseRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CharacterRepository extends CouchbaseRepository<Character, String> {
+import java.util.List;
 
+public interface CharacterRepository extends CrudRepository<Character, String> {
+
+    List<Character> findCharacterByNameExists(String name);
 }
