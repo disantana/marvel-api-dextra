@@ -30,7 +30,7 @@ public class SerieRepositoryTest extends Assertions {
                 .endYear(2020)
                 .build());
 
-        List<Serie> series = repository.findAllByCharacter(character.getName());
+        List<Serie> series = repository.findSeriesByCharacterExists(character);
         assertFalse(series.isEmpty());
         assertTrue(series.get(0).getDescription().equals("Serie description"));
         assertTrue(series.get(0).getEndYear() == 2020);

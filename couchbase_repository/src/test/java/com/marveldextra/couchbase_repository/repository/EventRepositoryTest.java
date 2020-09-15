@@ -27,7 +27,7 @@ public class EventRepositoryTest extends Assertions {
                 .description("Event description")
                 .title("Event title")
                 .build());
-        List<Event> events= repository.findAllByCharacter(character.getName());
+        List<Event> events= repository.findEventsByCharacterExists(character);
         assertFalse(events.isEmpty());
         assertTrue(events.get(0).getDescription().equals("Event description"));
     }

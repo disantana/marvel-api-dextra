@@ -29,7 +29,7 @@ public class StoryRepositoryTest extends Assertions {
                 .description("Story description")
                 .build());
 
-        List<Story> stories = repository.findAllByCharacter(character.getName());
+        List<Story> stories = repository.findStoriesByCharacterExists(character);
         assertFalse(stories.isEmpty());
         assertTrue(stories.get(0).getDescription().equals("Story description"));
     }
