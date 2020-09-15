@@ -24,7 +24,7 @@ public class CharacterController extends AbstractMarvelController{
   CollectionModel<EntityModel<Character>> all() {
     List<EntityModel<Character>> characters = service.findAll(FIRST_PAGE,PAGE_SIZE)
         .map(character -> EntityModel.of(character,
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(character.getId())).withRel("characters")))
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(character.getId())).withRel(LINK_TO_CHARACTER)))
         .stream().collect(Collectors.toList());
 
     return CollectionModel.of(characters, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withSelfRel());
@@ -36,7 +36,7 @@ public class CharacterController extends AbstractMarvelController{
     Character character = service.findById(id);
     return EntityModel.of(character,
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(id)).withSelfRel(),
-        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel("employees"));
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel(LINK_TO_CHARACTER));
   }
 
 }
