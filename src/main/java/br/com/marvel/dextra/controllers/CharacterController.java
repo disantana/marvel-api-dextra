@@ -36,7 +36,12 @@ public class CharacterController extends AbstractMarvelController{
     Character character = service.findById(id);
     return EntityModel.of(character,
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(id)).withSelfRel(),
-        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel(LINK_TO_CHARACTER));
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel(LINK_TO_CHARACTER),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ComicController.class).all(id)).withRel(LINK_TO_COMIC),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(StoryController.class).all(id)).withRel(LINK_TO_STORY),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(EventController.class).all(id)).withRel(LINK_TO_EVENT),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SerieController.class).all(id)).withRel(LINK_TO_EVENT)
+    );
   }
 
 }
