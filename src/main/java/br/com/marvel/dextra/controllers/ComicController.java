@@ -1,4 +1,4 @@
-package br.com.spring.boot.skeleton.controllers;
+package br.com.marvel.dextra.controllers;
 
 import com.marveldextra.couchbase_repository.entity.Comic;
 import com.marveldextra.couchbase_repository.repository.ComicRepository;

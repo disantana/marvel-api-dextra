@@ -1,6 +1,6 @@
-package br.com.spring.boot.skeleton.services;
+package br.com.marvel.dextra.services;
 
-import br.com.spring.boot.skeleton.exceptions.CharacterNotFoundException;
+import br.com.marvel.dextra.exceptions.CharacterNotFoundException;
 import com.marveldextra.couchbase_repository.entity.Character;
 import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;

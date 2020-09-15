@@ -1,6 +1,6 @@
-package br.com.spring.boot.skeleton.controllers;
+package br.com.marvel.dextra.controllers;
 
-import br.com.spring.boot.skeleton.services.CharacterService;
+import br.com.marvel.dextra.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
 import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;

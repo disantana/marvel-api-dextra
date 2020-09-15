@@ -1,4 +1,4 @@
-package br.com.spring.boot.skeleton.exceptions;
+package br.com.marvel.dextra.exceptions;
 
 public class CharacterNotFoundException extends RuntimeException {
 

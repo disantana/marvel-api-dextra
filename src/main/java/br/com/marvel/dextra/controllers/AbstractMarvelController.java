@@ -1,4 +1,4 @@
-package br.com.spring.boot.skeleton.controllers;
+package br.com.marvel.dextra.controllers;
 
 abstract class AbstractMarvelController {
   protected static final int PAGE_SIZE = 30;

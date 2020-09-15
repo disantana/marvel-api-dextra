@@ -1,6 +1,6 @@
-package br.com.spring.boot.skeleton.controllers;
+package br.com.marvel.dextra.controllers;
 
-import br.com.spring.boot.skeleton.exceptions.CharacterNotFoundException;
+import br.com.marvel.dextra.exceptions.CharacterNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
