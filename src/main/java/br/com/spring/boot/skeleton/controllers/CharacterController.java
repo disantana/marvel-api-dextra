@@ -1,10 +1,9 @@
 package br.com.spring.boot.skeleton.controllers;
 
-import br.com.spring.boot.skeleton.exceptions.CharacterNotFoundException;
+import br.com.spring.boot.skeleton.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
 import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -23,9 +22,11 @@ public class CharacterController extends AbstractMarvelController{
   @Autowired
   CharacterRepository repository;
 
+  @Autowired CharacterService service;
+
   @GetMapping("")
   CollectionModel<EntityModel<Character>> all() {
-    List<EntityModel<Character>> characters = repository.findAll(PageRequest.of(FIRST_PAGE,PAGE_SIZE))
+    List<EntityModel<Character>> characters = service.findAll(FIRST_PAGE,PAGE_SIZE)
         .map(character -> EntityModel.of(character,
             WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(character.getId())).withRel("characters")))
         .stream().collect(Collectors.toList());
@@ -36,8 +37,8 @@ public class CharacterController extends AbstractMarvelController{
 
   @GetMapping("/{id}")
   EntityModel<Character> getById(@PathVariable String id){
-    Character character = repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("Character not Found"));
-    return EntityModel.of(character, //
+    Character character = service.findById(id);
+    return EntityModel.of(character,
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(id)).withSelfRel(),
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel("employees"));
   }
