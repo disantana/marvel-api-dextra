@@ -17,23 +17,25 @@ public class ComicRepositoryTest {
     @Autowired private ComicRepository repository;
     @Autowired private CharacterRepository characterRepository;
 
-    @Test
-    public void shouldReturnComicWithSpecifiedCharacter(){
 
-        Character character = characterRepository.save(Character.builder()
-                .name("Comic's character Teste")
-                .description("Character's description")
-                .build());
-        
-        Comic comic = repository.save(Comic.builder()
-                .description("Comic description")
-                .pageCount(10)
-                .character(character).build());
-        
-        List<Comic> comics = repository.findAllByCharacter(character.getName());
-        comics.size();
-        Assertions.assertTrue(!comics.isEmpty());
-        Assertions.assertEquals("Comic description",comics.get(0).getDescription());
-        Assertions.assertTrue(comics.get(0).getCharacter().equals(character));
+
+    @Test
+    public void shouldReturnComicByCharacter(){
+
+      Character saved = characterRepository.save(Character.builder()
+          .name("ID")
+          .description("Character's description")
+          .build());
+
+      Comic comic = repository.save(Comic.builder()
+          .description("Comic description")
+          .pageCount(10)
+          .character(saved).build());
+
+      Character character = characterRepository.findCharacterByNameExists("ID").get(0);
+
+
+      List<Comic> result = repository.findComicsByCharacterExists(character);
+      Assertions.assertFalse(result.isEmpty());
     }
 }

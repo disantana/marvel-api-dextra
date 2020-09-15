@@ -1,9 +1,8 @@
 package br.com.marvel.dextra.controllers;
 
+import br.com.marvel.dextra.services.ComicService;
 import com.marveldextra.couchbase_repository.entity.Comic;
-import com.marveldextra.couchbase_repository.repository.ComicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -19,14 +18,14 @@ import java.util.stream.Collectors;
 @RequestMapping(AbstractMarvelController.BASE_PATH)
 public class ComicController extends AbstractMarvelController{
 
-  @Autowired ComicRepository repository;
+  @Autowired  ComicService service;
 
   @GetMapping("/{characterId}/comics")
   CollectionModel<EntityModel<Comic>> all(@PathVariable String characterId) {
-    List<EntityModel<Comic>> comics = repository.findAll(PageRequest.of(FIRST_PAGE,PAGE_SIZE))
+    List<EntityModel<Comic>> comics = service.findAll(characterId).stream()
         .map(comic -> EntityModel.of(comic,
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(comic.getId())).withRel("comics")))
-        .stream().collect(Collectors.toList());
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).getById(comic.getId())).withRel(LINK_TO_COMIC)))
+        .collect(Collectors.toList());
 
     return CollectionModel.of(comics, WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withSelfRel());
 
