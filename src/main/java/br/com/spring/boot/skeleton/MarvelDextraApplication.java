@@ -3,7 +3,8 @@ package br.com.spring.boot.skeleton;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.marveldextra.couchbase_repository",
+        "br.com.spring.boot.skeleton.controllers"})
 public class MarvelDextraApplication {
 
   public static void main(String[] args) {
