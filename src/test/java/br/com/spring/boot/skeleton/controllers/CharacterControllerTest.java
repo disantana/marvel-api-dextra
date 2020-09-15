@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,9 +19,15 @@ public class CharacterControllerTest {
   private MockMvc mvc;
 
   @Test
-  public void indexTest() throws Exception {
-    mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andExpect(content().string(equalTo("Hello Marvel Consumers")));
+  public void shouldReturnOKToBasePath() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get(AbstractMarvelController.BASE_PATH.concat("/")).accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  public void shouldReturnNotFound() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get(AbstractMarvelController.BASE_PATH.concat("/abc")).accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound())
+        .andExpect(content().string("Character not Found"));
   }
 }
