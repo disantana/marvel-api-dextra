@@ -2,7 +2,6 @@ package br.com.marvel.dextra.controllers;
 
 import br.com.marvel.dextra.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
-import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -18,9 +17,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(AbstractMarvelController.BASE_PATH)
 public class CharacterController extends AbstractMarvelController{
-
-  @Autowired
-  CharacterRepository repository;
 
   @Autowired CharacterService service;
 
