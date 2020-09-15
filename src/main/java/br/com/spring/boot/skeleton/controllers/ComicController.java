@@ -19,10 +19,9 @@ import java.util.stream.Collectors;
 @RequestMapping(AbstractMarvelController.BASE_PATH)
 public class ComicController extends AbstractMarvelController{
 
-  @Autowired
-  ComicRepository repository;
+  @Autowired ComicRepository repository;
 
-  @GetMapping("/{characterId}")
+  @GetMapping("/{characterId}/comics")
   CollectionModel<EntityModel<Comic>> all(@PathVariable String characterId) {
     List<EntityModel<Comic>> comics = repository.findAll(PageRequest.of(FIRST_PAGE,PAGE_SIZE))
         .map(comic -> EntityModel.of(comic,
