@@ -29,7 +29,7 @@ Após Realizar a configuração manual do Couchbase, acesse o diretório da apli
 Nesta etapa será preciso instalar a dependência couchbase_repository que se en contra em meu-diretorio/marvel-api-dextra/couchbase_repository.
 execute o comando `mvn install -Dmaven.test.skip=true` neste diretório. Em seguida, `cd ..` e novamente `mvn install -Dmaven.test.skip=true`
 
-Para finalizar, `java -jar target/marvel-dextra-api-0.0.1-SNAPSHOT.jar`
+Para finalizar, `mvn clean spring-boot:run`
 
 
 
