@@ -1,12 +1,12 @@
 package br.com.marvel.dextra.service;
 
 import br.com.marvel.dextra.dto.CharacterRequestDTO;
-import br.com.marvel.dextra.dto.CharacterResponseDTO;
-import br.com.marvel.dextra.dto.DtoToBeDeleted;
+import br.com.marvel.dextra.exceptions.CharacterExistsException;
 import br.com.marvel.dextra.services.CharacterService;
-import com.marveldextra.couchbase_repository.entity.TesteToBeDeleted;
+import com.marveldextra.couchbase_repository.entity.Character;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -16,18 +16,24 @@ public class CharacterServiceTest extends Assertions {
   @Autowired  CharacterService service;
 
   @Test
-  public void shouldSaveWithoutException(){
-
+  public void shouldSaveWithoutException() {
     CharacterRequestDTO dto = new CharacterRequestDTO("Character Service Test",
         "description", "resource");
-    CharacterResponseDTO response = service.save(dto);
+    Character response = service.save(dto);
     assertNotNull(response);
     assertEquals(dto.getName(), response.getName());
   }
+
   @Test
-  public void teste(){
-    DtoToBeDeleted dto = new DtoToBeDeleted("Name teste","desc","resou");
-    TesteToBeDeleted result = service.teste(dto);
-    assertNotNull(result);
+  public void shouldThrowCharacterExistsException(){
+    CharacterRequestDTO dto = new CharacterRequestDTO("Character Service Test",
+        "description", "resource");
+    assertThrows(CharacterExistsException.class, new Executable() {
+      @Override
+      public void execute() throws Throwable {
+        service.save(dto);
+      }
+    });
   }
+
 }

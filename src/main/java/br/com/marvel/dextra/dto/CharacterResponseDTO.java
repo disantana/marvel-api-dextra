@@ -1,14 +1,11 @@
 package br.com.marvel.dextra.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Value;
-@Builder
-@Value
+
+@AllArgsConstructor
 @Data
 public class CharacterResponseDTO {
-
-   private String id;
 
    private String name;
 

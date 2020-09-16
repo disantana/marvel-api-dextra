@@ -1,7 +1,6 @@
 package br.com.marvel.dextra.controllers;
 
 import br.com.marvel.dextra.dto.CharacterRequestDTO;
-import br.com.marvel.dextra.dto.CharacterResponseDTO;
 import br.com.marvel.dextra.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +46,13 @@ public class CharacterController extends AbstractMarvelController{
   }
 
   @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-  EntityModel<ResponseEntity<CharacterResponseDTO>> save(@RequestBody CharacterRequestDTO dto) {
-    CharacterResponseDTO characterAfterSave = service.save(dto);
-    return EntityModel.of(ResponseEntity.status(HttpStatus.CREATED).body(characterAfterSave),
-        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel(LINK_TO_CHARACTER));
+  @ResponseStatus(code = HttpStatus.CREATED)
+  EntityModel<ResponseEntity<Character>> save(@RequestBody CharacterRequestDTO dto) {
+    Character characterAfterSave = service.save(dto);
+
+    return EntityModel.of(ResponseEntity. status(HttpStatus.CREATED).body(characterAfterSave),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class)
+            .getById(characterAfterSave.getId())).withRel(LINK_TO_CHARACTER));
   }
 
 }

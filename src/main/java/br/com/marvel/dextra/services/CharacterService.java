@@ -1,12 +1,13 @@
 package br.com.marvel.dextra.services;
 
 import br.com.marvel.dextra.dto.CharacterRequestDTO;
-import br.com.marvel.dextra.dto.CharacterResponseDTO;
+import br.com.marvel.dextra.exceptions.CharacterExistsException;
 import br.com.marvel.dextra.exceptions.CharacterNotFoundException;
-import br.com.marvel.dextra.exceptions.MarvelGenericException;
+import br.com.marvel.dextra.exceptions.RequestException;
 import com.marveldextra.couchbase_repository.entity.Character;
 import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,19 +30,26 @@ public class CharacterService {
     return repository.findAll(PageRequest.of(page,pageSize));
   }
 
-  public CharacterResponseDTO save(CharacterRequestDTO dto) {
-    try {
+  public Character save(CharacterRequestDTO dto) {
+      checkDTO(dto);
       modelMapper = new ModelMapper();
-      //TODO VALIDAR INPUT
-      Character character = modelMapper.map(dto, Character.CharacterBuilder.class).build();
-      repository.save(character);
-      Optional<Character> characterSaved = repository.findCharacterByNameExists(character.getName()).stream().findFirst();
-      return modelMapper.map(characterSaved, CharacterResponseDTO.CharacterResponseDTOBuilder.class).build();
+      Character character = modelMapper.map(dto, Character.class);
+      Optional<Character> characterFound = null;
 
-    } catch (Exception e) {
-      log.atFatal().log("Can not save entity", e);
-      throw new MarvelGenericException("Can not save entity.");
-    }
+      characterFound = repository.findCharacterByNameExists(character.getName())
+          .stream()
+          .findFirst();
+      if (characterFound.isPresent()) throw new CharacterExistsException(characterFound.get().getName());
+
+      repository.save(character);
+      return character;
+  }
+
+  private void checkDTO(CharacterRequestDTO dto) {
+    if (StringUtils.isBlank(dto.getName()) ||
+        StringUtils.isBlank(dto.getDescription()) ||
+        StringUtils.isBlank(dto.getResourceURI())) throw new RequestException("Invalid data as payload.");
+
   }
 
 }
