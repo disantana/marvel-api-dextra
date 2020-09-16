@@ -1,15 +1,17 @@
 package br.com.marvel.dextra.controllers;
 
+import br.com.marvel.dextra.dto.CharacterRequestDTO;
+import br.com.marvel.dextra.dto.CharacterResponseDTO;
 import br.com.marvel.dextra.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +44,13 @@ public class CharacterController extends AbstractMarvelController{
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(EventController.class).all(id)).withRel(LINK_TO_EVENT),
         WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(SerieController.class).all(id)).withRel(LINK_TO_EVENT)
     );
+  }
+
+  @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+  EntityModel<ResponseEntity<CharacterResponseDTO>> save(@RequestBody CharacterRequestDTO dto) {
+    CharacterResponseDTO characterAfterSave = service.save(dto);
+    return EntityModel.of(ResponseEntity.status(HttpStatus.CREATED).body(characterAfterSave),
+        WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CharacterController.class).all()).withRel(LINK_TO_CHARACTER));
   }
 
 }
