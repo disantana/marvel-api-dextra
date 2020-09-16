@@ -2,11 +2,9 @@ package br.com.marvel.dextra.services;
 
 import br.com.marvel.dextra.dto.CharacterRequestDTO;
 import br.com.marvel.dextra.dto.CharacterResponseDTO;
-import br.com.marvel.dextra.dto.DtoToBeDeleted;
 import br.com.marvel.dextra.exceptions.CharacterNotFoundException;
 import br.com.marvel.dextra.exceptions.MarvelGenericException;
 import com.marveldextra.couchbase_repository.entity.Character;
-import com.marveldextra.couchbase_repository.entity.TesteToBeDeleted;
 import com.marveldextra.couchbase_repository.repository.CharacterRepository;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -46,9 +44,4 @@ public class CharacterService {
     }
   }
 
-  public TesteToBeDeleted teste(DtoToBeDeleted dto){
-    modelMapper = new ModelMapper();
-    TesteToBeDeleted character = modelMapper.map(dto, TesteToBeDeleted.class);
-    return character;
-  }
 }

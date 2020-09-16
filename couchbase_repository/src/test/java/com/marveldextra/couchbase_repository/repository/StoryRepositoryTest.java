@@ -17,17 +17,16 @@ public class StoryRepositoryTest extends Assertions {
 
     @Test
     public void shouldReturnStorySearchedByCharacter(){
-        Character character = characterRepository.save(Character.builder()
-                .name("Story character Teste")
-                .description("Character's description")
-                .build());
+      Character character = new Character();
+      character.setName("Story character Teste");
+      character.setDescription("Character's description");
 
-       Story story = repository.save(Story.builder()
-                .character(character)
-                .pageCount(300)
-                .title("Story title")
-                .description("Story description")
-                .build());
+     Story story = repository.save(Story.builder()
+              .character(character)
+              .pageCount(300)
+              .title("Story title")
+              .description("Story description")
+              .build());
 
         List<Story> stories = repository.findStoriesByCharacterExists(character);
         assertFalse(stories.isEmpty());

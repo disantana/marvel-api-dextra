@@ -17,18 +17,17 @@ public class SerieRepositoryTest extends Assertions {
 
     @Test
     public void shouldReturnSerieSearchedByCharacter(){
-        Character character = characterRepository.save(Character.builder()
-                .name("Comic's character Teste")
-                .description("Character's description")
-                .build());
+      Character character = new Character();
+      character.setName("Comic's character Teste");
+      character.setDescription("Character's description");
 
-        Serie story = repository.save(Serie.builder()
-                .character(character)
-                .title("Serie title")
-                .description("Serie description")
-                .startYear(2010)
-                .endYear(2020)
-                .build());
+      Serie story = repository.save(Serie.builder()
+          .character(character)
+          .title("Serie title")
+          .description("Serie description")
+          .startYear(2010)
+          .endYear(2020)
+          .build());
 
         List<Serie> series = repository.findSeriesByCharacterExists(character);
         assertFalse(series.isEmpty());

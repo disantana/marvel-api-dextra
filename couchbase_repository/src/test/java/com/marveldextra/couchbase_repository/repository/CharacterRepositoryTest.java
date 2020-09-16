@@ -21,13 +21,14 @@ public class CharacterRepositoryTest extends Assertions{
 
     @Test
     public void shouldSaveANewCharacterWithID(){
-        character = repository.save(Character.builder()
-                .description("description")
-                .name("name")
-                .resourceURI("http://www.marvel.com").build());
+      character = new Character();
+      character.setDescription("description");
+      character.setName("name");
+      character.setResourceURI("http://www.marvel.com");
+      repository.save(character);
 
-        Iterable<Character> all = repository.findAll();
-        assertEquals("description", character.getDescription());
+      Iterable<Character> all = repository.findAll();
+      assertEquals("description", character.getDescription());
     }
 
     @Test

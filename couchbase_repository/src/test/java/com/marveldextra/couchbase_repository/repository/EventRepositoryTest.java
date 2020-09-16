@@ -17,18 +17,17 @@ public class EventRepositoryTest extends Assertions {
 
     @Test
     public void shouldReturnEventSearchedByCharacter(){
-        Character character = characterRepository.save(Character.builder()
-                .name("Comic's character Teste")
-                .description("Character's description")
-                .build());
+      Character character = new Character();
+      character.setName("Comic's character Teste");
+      character.setDescription("Character's description");
 
-        Event event = repository.save(Event.builder()
-                .character(character)
-                .description("Event description")
-                .title("Event title")
-                .build());
-        List<Event> events= repository.findEventsByCharacterExists(character);
-        assertFalse(events.isEmpty());
-        assertTrue(events.get(0).getDescription().equals("Event description"));
+      Event event = repository.save(Event.builder()
+        .character(character)
+        .description("Event description")
+        .title("Event title")
+        .build());
+      List<Event> events= repository.findEventsByCharacterExists(character);
+      assertFalse(events.isEmpty());
+      assertTrue(events.get(0).getDescription().equals("Event description"));
     }
 }
