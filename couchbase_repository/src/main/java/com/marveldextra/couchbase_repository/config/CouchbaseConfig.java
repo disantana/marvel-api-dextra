@@ -1,43 +1,31 @@
 package com.marveldextra.couchbase_repository.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 
 @Configuration
 public class CouchbaseConfig extends AbstractCouchbaseConfiguration{
 
-  @Value("${couchbase_host}")
-  private String hostname;
+    @Override
+    public String getConnectionString() {
+        return "couchbase://172.17.0.2";
+    }
 
-  @Value("${couchbase_bucket}")
-  private String bucket;
+    @Override
+    public String getUserName() {
+        return "marvelapp";
+    }
 
-  @Value("${couchbase_bucket_password}")
-  private String password;
+    @Override
+    public String getPassword() {
+        return "marvel";
+    }
 
-  @Override
-  public String getConnectionString() {
-      return "couchbase://".concat(hostname);
-  }
-
-  @Override
-  public String getUserName() {
-      return bucket;
-  }
-
-  @Override
-  public String getPassword() {
-      return password;
-  }
-
-  @Override
-  public String getBucketName() {
-      return bucket;
-  }
-
-
-
+    @Override
+    public String getBucketName() {
+        return "marvel";
+    } 
+    
     
 }
