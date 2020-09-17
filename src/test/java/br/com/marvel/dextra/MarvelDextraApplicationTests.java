@@ -1,4 +1,4 @@
-package br.com.spring.boot.skeleton;
+package br.com.marvel.dextra;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
