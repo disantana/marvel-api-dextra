@@ -1,7 +1,7 @@
 package br.com.marvel.dextra.services;
 
 import br.com.marvel.dextra.dto.EventRequestDTO;
-import br.com.marvel.dextra.exceptions.ComicExistsException;
+import br.com.marvel.dextra.exceptions.EventExistsException;
 import br.com.marvel.dextra.exceptions.RequestException;
 import com.marveldextra.couchbase_repository.entity.Character;
 import com.marveldextra.couchbase_repository.entity.Event;
@@ -45,7 +45,7 @@ public class EventService {
         .filter(filter -> filter.getTitle().equals(event.getTitle()))
         .collect(Collectors.toList());
 
-    if (!eventFound.isEmpty()) throw new ComicExistsException(eventFound.get(0).getTitle());
+    if (!eventFound.isEmpty()) throw new EventExistsException(eventFound.get(0).getTitle());
 
     event.setCharacter(characterFound);
     repository.save(event);

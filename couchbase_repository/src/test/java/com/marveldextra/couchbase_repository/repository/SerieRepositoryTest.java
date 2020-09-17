@@ -21,18 +21,16 @@ public class SerieRepositoryTest extends Assertions {
       character.setName("Comic's character Teste");
       character.setDescription("Character's description");
 
-      Serie story = repository.save(Serie.builder()
-          .character(character)
-          .title("Serie title")
-          .description("Serie description")
-          .startYear(2010)
-          .endYear(2020)
-          .build());
-
-        List<Serie> series = repository.findSeriesByCharacterExists(character);
-        assertFalse(series.isEmpty());
-        assertTrue(series.get(0).getDescription().equals("Serie description"));
-        assertTrue(series.get(0).getEndYear() == 2020);
+      Serie serie = new Serie();
+      serie.setTitle("Serie title");
+      serie.setDescription("Serie description");
+      serie.setStartYear(2010);
+      serie.setEndYear(2020);
+      serie.setCharacter(character);
+      List<Serie> series = repository.findSeriesByCharacterExists(character);
+      assertFalse(series.isEmpty());
+      assertTrue(series.get(0).getDescription().equals("Serie description"));
+      assertTrue(series.get(0).getEndYear() == 2020);
     }
 
 }

@@ -46,4 +46,18 @@ public class ControllerExceptionAdvice {
     return ResponseEntity.badRequest().body(ex.getMessage());
   }
 
+  @ResponseBody
+  @ExceptionHandler(EventExistsException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  ResponseEntity<String> requestError(EventExistsException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
+
+  @ResponseBody
+  @ExceptionHandler(SerieExistsException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  ResponseEntity<String> requestError(SerieExistsException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
+
 }

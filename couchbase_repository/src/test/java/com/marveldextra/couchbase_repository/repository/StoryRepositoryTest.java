@@ -21,16 +21,14 @@ public class StoryRepositoryTest extends Assertions {
       character.setName("Story character Teste");
       character.setDescription("Character's description");
 
-     Story story = repository.save(Story.builder()
-              .character(character)
-              .pageCount(300)
-              .title("Story title")
-              .description("Story description")
-              .build());
-
-        List<Story> stories = repository.findStoriesByCharacterExists(character);
-        assertFalse(stories.isEmpty());
-        assertTrue(stories.get(0).getDescription().equals("Story description"));
+      Story story = new Story();
+      story.setCharacter(character);
+      story.setPageCount(300);
+      story.setTitle("Story title");
+      story.setDescription("Story description");
+      List<Story> stories = repository.findStoriesByCharacterExists(character);
+      assertFalse(stories.isEmpty());
+      assertTrue(stories.get(0).getDescription().equals("Story description"));
     }
 
 
