@@ -1,6 +1,11 @@
 # marvel-api-dextra
 Dextra API para simular a api da Marvel.
 
+### Requisitos gerais
+* Maven (https://maven.apache.org/install.html)
+* JAVA 8
+* Docker (https://docs.docker.com/get-docker/)
+
 ### Docker
 `docker run -d --name couchbase -p 8091-8094:8091-8094 -p 11210:11210 couchbase`
 
@@ -38,6 +43,10 @@ Execute o seguinte comando na raiz do projeto
 
 Para gerar o relatório de cobertura de teste
 `mvn test jacoco:report`
+
+## Observação 1: Até o momento o teste de integração com o DB está sendo feito com a mesma instância do Couchbase que a aplicação utiliza. Próxima feature: usar https://testcontainers.org
+
+## Observação 2: Em breve, ambiente com docker-compose(https://docs.docker.com/compose/install/)!  
 
 
 
