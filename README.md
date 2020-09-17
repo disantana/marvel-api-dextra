@@ -5,6 +5,13 @@ Dextra API para simular a api da Marvel.
 * Maven (https://maven.apache.org/install.html)
 * JAVA 8
 * Docker (https://docs.docker.com/get-docker/)
+* Git (https://git-scm.com/)
+
+### Instruções para baixar o projeto
+
+`cd seu-diretorio`
+
+`git clone https://github.com/disantana/marvel-api-dextra.git`
 
 ### Docker
 `docker run -d --name couchbase -p 8091-8094:8091-8094 -p 11210:11210 couchbase`
