@@ -44,4 +44,12 @@ public class CharacterControllerTest {
             "hulk.com"))))
         .andExpect(status().is2xxSuccessful());
   }
+
+  @Test
+  public void shouldNotDelete() throws Exception{
+    mvc.perform(MockMvcRequestBuilders.delete(AbstractMarvelController.BASE_PATH.concat("/abc"))
+        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(status().is4xxClientError());
+  }
+
 }

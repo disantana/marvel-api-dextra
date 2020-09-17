@@ -45,11 +45,14 @@ public class CharacterService {
       return character;
   }
 
+  private void deleteById(String id){
+    repository.deleteById(id);
+  }
+
   private void checkDTO(CharacterRequestDTO dto) {
     if (StringUtils.isBlank(dto.getName()) ||
         StringUtils.isBlank(dto.getDescription()) ||
         StringUtils.isBlank(dto.getResourceURI())) throw new RequestException("Invalid data as payload.");
-
   }
 
 }
