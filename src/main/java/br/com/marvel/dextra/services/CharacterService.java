@@ -37,7 +37,7 @@ public class CharacterService {
       Character character = modelMapper.map(dto, Character.class);
       Optional<Character> characterFound = null;
 
-      characterFound = repository.findCharacterByNameExists(character.getName())
+      characterFound = repository.findCharacterByNameEquals(character.getName())
           .stream()
           .findFirst();
       if (characterFound.isPresent()) throw new CharacterExistsException(characterFound.get().getName());

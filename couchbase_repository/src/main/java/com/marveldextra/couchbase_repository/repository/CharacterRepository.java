@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CharacterRepository extends CrudRepository<Character, String> {
 
-    List<Character> findCharacterByNameExists(String name);
+    List<Character> findCharacterByNameEquals(String name);
 
     Page<Character> findAll(Pageable pageable);
 }

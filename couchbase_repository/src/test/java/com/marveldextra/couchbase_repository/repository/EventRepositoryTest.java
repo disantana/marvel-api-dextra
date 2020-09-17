@@ -21,11 +21,11 @@ public class EventRepositoryTest extends Assertions {
       character.setName("Comic's character Teste");
       character.setDescription("Character's description");
 
-      Event event = repository.save(Event.builder()
-        .character(character)
-        .description("Event description")
-        .title("Event title")
-        .build());
+      Event event = new Event();
+      event.setDescription("Event description");
+      event.setTitle("Event title");
+      event.setCharacter(character);
+
       List<Event> events= repository.findEventsByCharacterExists(character);
       assertFalse(events.isEmpty());
       assertTrue(events.get(0).getDescription().equals("Event description"));

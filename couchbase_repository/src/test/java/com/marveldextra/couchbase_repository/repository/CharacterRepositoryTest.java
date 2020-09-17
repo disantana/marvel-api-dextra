@@ -33,13 +33,13 @@ public class CharacterRepositoryTest extends Assertions{
 
     @Test
     public void shouldReturnCharacterWithNameSearched(){
-        List<Character> c = repository.findCharacterByNameExists("name");
+        List<Character> c = repository.findCharacterByNameEquals("name");
         assertFalse(c.isEmpty());
     }
 
     @Test
     public void shouldReturnCharacterWithIdSearched(){
-       character = repository.findCharacterByNameExists("name").get(0);
+       character = repository.findCharacterByNameEquals("name").get(0);
        Optional<Character> searched = repository.findById(character.getId());
        assertTrue(searched.get().equals(character));
     }

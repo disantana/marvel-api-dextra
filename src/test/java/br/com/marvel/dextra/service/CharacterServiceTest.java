@@ -1,12 +1,10 @@
 package br.com.marvel.dextra.service;
 
 import br.com.marvel.dextra.dto.CharacterRequestDTO;
-import br.com.marvel.dextra.exceptions.CharacterExistsException;
 import br.com.marvel.dextra.services.CharacterService;
 import com.marveldextra.couchbase_repository.entity.Character;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,18 +20,6 @@ public class CharacterServiceTest extends Assertions {
     Character response = service.save(dto);
     assertNotNull(response);
     assertEquals(dto.getName(), response.getName());
-  }
-
-  @Test
-  public void shouldThrowCharacterExistsException(){
-    CharacterRequestDTO dto = new CharacterRequestDTO("Character Service Test",
-        "description", "resource");
-    assertThrows(CharacterExistsException.class, new Executable() {
-      @Override
-      public void execute() throws Throwable {
-        service.save(dto);
-      }
-    });
   }
 
 }

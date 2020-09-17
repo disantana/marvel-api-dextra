@@ -30,7 +30,7 @@ public class ComicRepositoryTest {
       comic.setTitle("Title");
       comic.setPageCount(10);
       comic.setDescription("Description");
-      Character searchedCharacter = characterRepository.findCharacterByNameExists("ID").get(0);
+      Character searchedCharacter = characterRepository.findCharacterByNameEquals("ID").get(0);
 
       List<Comic> result = repository.findComicsByCharacterExists(searchedCharacter);
       Assertions.assertFalse(result.isEmpty());
