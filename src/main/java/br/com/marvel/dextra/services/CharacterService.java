@@ -21,7 +21,8 @@ import java.util.Optional;
 public class CharacterService {
 
   @Autowired  CharacterRepository repository;
-  ModelMapper modelMapper ;
+  private ModelMapper modelMapper;
+
   public Character findById(String id) {
     return repository.findById(id).orElseThrow(() -> new CharacterNotFoundException("Character not Found"));
   }

@@ -22,6 +22,7 @@ public class CharacterController extends AbstractMarvelController{
   @Autowired CharacterService service;
 
   @GetMapping("")
+  @ResponseStatus(code = HttpStatus.OK)
   CollectionModel<EntityModel<Character>> all() {
     List<EntityModel<Character>> characters = service.findAll(FIRST_PAGE,PAGE_SIZE)
         .map(character -> EntityModel.of(character,
@@ -33,6 +34,7 @@ public class CharacterController extends AbstractMarvelController{
   }
 
   @GetMapping("/{id}")
+  @ResponseStatus(code = HttpStatus.OK)
   EntityModel<Character> getById(@PathVariable String id){
     Character character = service.findById(id);
     return EntityModel.of(character,

@@ -1,9 +1,6 @@
 package br.com.marvel.dextra.controllers;
 
-import br.com.marvel.dextra.exceptions.CharacterExistsException;
-import br.com.marvel.dextra.exceptions.CharacterNotFoundException;
-import br.com.marvel.dextra.exceptions.MarvelGenericException;
-import br.com.marvel.dextra.exceptions.RequestException;
+import br.com.marvel.dextra.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -42,5 +39,11 @@ public class ControllerExceptionAdvice {
     return ResponseEntity.badRequest().body(ex.getMessage());
   }
 
+  @ResponseBody
+  @ExceptionHandler(ComicExistsException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  ResponseEntity<String> requestError(ComicExistsException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
 
 }

@@ -24,12 +24,12 @@ public class ComicRepositoryTest {
       character.setName("ID");
 
       Character saved = characterRepository.save(character);
+      Comic comic = new Comic();
 
-      Comic comic = repository.save(Comic.builder()
-          .description("Comic description")
-          .pageCount(10)
-          .character(saved).build());
-
+      comic.setCharacter(character);
+      comic.setTitle("Title");
+      comic.setPageCount(10);
+      comic.setDescription("Description");
       Character searchedCharacter = characterRepository.findCharacterByNameExists("ID").get(0);
 
       List<Comic> result = repository.findComicsByCharacterExists(searchedCharacter);
