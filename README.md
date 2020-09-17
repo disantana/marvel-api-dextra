@@ -31,5 +31,13 @@ execute o comando `mvn install -Dmaven.test.skip=true` neste diretório. Em segu
 
 Para finalizar, `mvn clean spring-boot:run`
 
+### TEST
+Execute o seguinte comando na raiz do projeto
+`mvn test`
+
+Para gerar o relatório de cobertura de teste
+`mvn test jacoco:report`
+
+
 
 
