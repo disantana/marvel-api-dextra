@@ -54,6 +54,9 @@ public class CharacterService {
     if (StringUtils.isBlank(dto.getName()) ||
         StringUtils.isBlank(dto.getDescription()) ||
         StringUtils.isBlank(dto.getResourceURI())) throw new RequestException("Invalid data as payload.");
+    if (StringUtils.contains(dto.getName(), "/") || StringUtils.isNumeric(dto.getName()))
+      throw new RequestException("Invalid data as payload.");
+
   }
 
 }
