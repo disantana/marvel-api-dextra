@@ -53,6 +53,9 @@ public class SerieService {
   }
 
   private void checkDTO(SerieResquestDTO dto) {
+
     if (StringUtils.isBlank(dto.getTitle())) throw new RequestException("Invalid data as payload.");
+    if (StringUtils.contains(dto.getTitle(), "/") || StringUtils.isNumeric(dto.getTitle()))
+      throw new RequestException("Invalid data as payload.");
   }
 }

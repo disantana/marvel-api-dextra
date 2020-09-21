@@ -52,7 +52,10 @@ public class StoryService {
   }
 
   private void checkDTO(StoryRequestDTO dto) {
+
     if (StringUtils.isBlank(dto.getTitle())) throw new RequestException("Invalid data as payload.");
+    if (StringUtils.contains(dto.getTitle(), "/") || StringUtils.isNumeric(dto.getTitle()))
+      throw new RequestException("Invalid data as payload.");
   }
 
 }
