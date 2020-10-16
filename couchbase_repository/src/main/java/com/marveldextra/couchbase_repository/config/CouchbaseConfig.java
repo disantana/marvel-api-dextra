@@ -1,17 +1,19 @@
 package com.marveldextra.couchbase_repository.config;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 
 @Configuration
 public class CouchbaseConfig extends AbstractCouchbaseConfiguration{
 
-
+    @Value("${ip}")
+    private String ip;
 
     @Override
     public String getConnectionString() {
-        return "couchbase://127.0.0.1";
+        return "couchbase://".concat(ip);
     }
 
     @Override
